@@ -9,14 +9,11 @@ public:
         }
         
         int i =0;
-        while(c[0]--){
-            nums[i++] =0;
-        }
-        while(c[1]--){
-            nums[i++] =1;
-        }
-        while(c[2]--){
-            nums[i++] =2;
+        
+        for(int j = 0; j< 3;j++){
+            while(c[j]--){
+                nums[i++] =j;
+            }
         }
 
     }
