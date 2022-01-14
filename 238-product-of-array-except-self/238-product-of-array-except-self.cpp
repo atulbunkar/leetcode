@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
-        vector<int> prefprod, suffprod;
+        vector<int> prefprod, suffprod(nums.size());
         int temp =1 , t2 =1;
         
         for(int i = 0 ; i < nums.size() ; i++){
@@ -9,10 +9,9 @@ public:
             prefprod.push_back(temp);
             
             t2 = t2*nums[nums.size()-i-1];
-            suffprod.push_back(t2);
+            suffprod[nums.size()-i-1] = t2;
             
         }
-        reverse(suffprod.begin(), suffprod.end());
         
         for(int i = 0 ; i < nums.size() ; i++){
             
