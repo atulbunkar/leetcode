@@ -3,14 +3,7 @@ public:
     void setZeroes(vector<vector<int>>& mt) {
         int r = mt.size() , c = mt[0].size();
         int first0row = -1; 
-        if(r==1 and c==1){
-            if(mt[0][0] == 1)return ;
-            else{
-                mt[0][0] = 0;
-                return;
-            }
-        }
-        
+      
         for(int i=0; i < r ; i++ ){
             
             for(int j = 0 ; j < c ; j++){
