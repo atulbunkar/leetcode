@@ -15,34 +15,41 @@ public:
           vector<vector<int>> ans;
         if(!root)return ans;
       
-        queue<TreeNode*> curr;   queue<TreeNode*> next;
+        queue<TreeNode*> curr;   stack<TreeNode*> next;
         curr.push(root);
         vector<int> temp;
-        int nodes = 0; int k = 0;
+        int nodes = 0; int lvl = 0; 
         
         while(!curr.empty()){
             TreeNode* t = curr.front(); curr.pop();
             
             temp.push_back(t->val);
             
-            if(t->left)
-                next.push(t->left);
-            if(t->right)
-                next.push(t->right);
+            if(lvl%2==0){
+                if(t->left)
+                    next.push(t->left);
+                if(t->right)
+                    next.push(t->right);
+            }
+            else{
+                 if(t->right)
+                    next.push(t->right);
+                if(t->left)
+                    next.push(t->left);
+            }
             
             if(curr.empty()){
-                curr.swap(next);    //swaps the elements of queue
+                lvl++;
+                while(!next.empty()){
+                    TreeNode* n = next.top(); next.pop();
+                    curr.push(n);
+                }
                 ans.push_back(temp);
                 temp.clear();
             }
             
         }
-        int c = 0;
-        for(auto& x:ans){
-            if(c%2 ==1)
-                reverse(x.begin(),x.end());
-            c++;
-        }
+        
         
         
         return ans;
