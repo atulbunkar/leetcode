@@ -12,7 +12,7 @@ public:
                     string str = "";
                     if(len == 1)return true;
                     bt(board , word , 0 , i,j,str, vstd);
-                    cout << str ;
+                    //cout << str ;
                 }
                 if(found)return true;
             }
