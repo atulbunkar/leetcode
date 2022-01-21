@@ -27,13 +27,12 @@ public:
     
     void rec(Node* root){
         if(!root)return ;
-        Node* c = root;
         
-        if(c->left)
-            c->left->next = c->right;
+        if(root->left)
+            root->left->next = root->right;
         
-        if(c->next and c->right){
-            c->right->next = c->next->left;
+        if(root->next and root->right){
+            root->right->next = root->next->left;
         }
         
         rec(root->left);
