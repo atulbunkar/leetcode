@@ -33,7 +33,6 @@ public:
             c->left->next = c->right;
         
         if(c->next and c->right){
-            cout<< c->val << " ";
             c->right->next = c->next->left;
         }
         
