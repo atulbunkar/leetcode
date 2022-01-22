@@ -25,9 +25,11 @@ public:
     void dp(TreeNode* r){
         if(!r)return;
         
-        TreeNode* t = r->left;
-        r->left = r->right;
-        r->right = t;
+        // TreeNode* t = r->left;
+        // r->left = r->right;
+        // r->right = t;
+        
+        swap(r->left,r->right);
         
         dp(r->left);
         dp(r->right);
