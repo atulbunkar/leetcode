@@ -28,7 +28,6 @@ public:
         
     }
     
-    
     void dif(TreeNode* root){
          diff = min(diff, abs(root->val - getpred(root)));
          diff = min(diff , abs(root->val - getsucc(root)));     
