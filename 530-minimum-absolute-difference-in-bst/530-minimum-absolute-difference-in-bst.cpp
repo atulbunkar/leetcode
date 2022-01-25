@@ -11,19 +11,20 @@
  */
 class Solution {
 public:
-    int diff = INT_MAX; int prev = -1;
+    int diff = INT_MAX; TreeNode* prev = NULL;
     
     int getMinimumDifference(TreeNode* root) {
         if(!root)return 0;
         
         getMinimumDifference(root->left);
         
-        if(prev>-1)
-            diff = min(diff, abs(prev-root->val));
+        if(prev)
+            diff = min(diff, abs(prev->val - root->val));
+         prev = root;
         
-        prev = root->val;
+        getMinimumDifference(root->right );
         
-        getMinimumDifference(root->right);
+        
         
         return diff;
     }
