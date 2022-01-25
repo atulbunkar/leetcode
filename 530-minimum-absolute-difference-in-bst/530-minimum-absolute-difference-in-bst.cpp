@@ -11,44 +11,22 @@
  */
 class Solution {
 public:
-    int diff = INT_MAX;
+    int diff = INT_MAX; int prev = -1;
+    
     int getMinimumDifference(TreeNode* root) {
+        if(!root)return 0;
         
-        stack<TreeNode*> st;
-        st.push(root);
+        getMinimumDifference(root->left);
         
-        while(!st.empty()){
-            root = st.top(); st.pop();
-            dif(root);
-            if(root->left)st.push(root->left);
-            if(root->right)st.push(root->right);
-            
-        }
-       return diff;
+        if(prev>-1)
+            diff = min(diff, abs(prev-root->val));
         
+        prev = root->val;
+        
+        getMinimumDifference(root->right);
+        
+        return diff;
     }
     
-    void dif(TreeNode* root){
-         diff = min(diff, abs(root->val - getpred(root)));
-         diff = min(diff , abs(root->val - getsucc(root)));     
-    }
     
-    int getpred(TreeNode* root){
-        if(!root->left)return INT_MAX;
-        
-        root = root->left;
-        while(root->right){
-            root = root->right;
-        }
-        return root->val;
-    }
-    int getsucc(TreeNode* root){
-        if(!root->right)return INT_MAX;
-        
-        root = root->right;
-        while(root->left){
-            root = root->left;
-        }
-        return root->val;
-    }
 };
