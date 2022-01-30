@@ -3,18 +3,18 @@ class Solution {
 public:
     int ans = 0;
     int diameterOfBinaryTree(TreeNode* root) {
-        help(root);
+        help(root,0);
         return ans;
     }
     
-    int help(TreeNode* root){
-        if(!root)return -1;
-        int lh = 1+help(root->left);
-        int rh = 1+help(root->right);
+    int help(TreeNode* root, int val){
+        if(!root)return 0;
         
-     
-        ans = max(ans, lh+rh);
-        //cout<< "root : "<< root->val << " : " << lh << rh<<endl;
-        return max(lh,rh);
+        int l =  help(root->left, val+1) ;
+        int r = help(root->right,val+1);
+        
+        ans = max(ans , l+r);
+        
+        return 1+ max( l , r);
     }
 };
