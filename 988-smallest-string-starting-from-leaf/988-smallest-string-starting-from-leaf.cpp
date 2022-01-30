@@ -12,14 +12,14 @@
 class Solution {
 public:
     
-    vector<string> v;
+    string ans = "~";
     string smallestFromLeaf(TreeNode* root) {
       
         dp(root,"");
         
-        sort(v.begin(),v.end());
+        //sort(v.begin(),v.end());
         
-        return v[0];
+        return ans;
     }
     
     void dp(TreeNode* root, string s){
@@ -28,7 +28,7 @@ public:
         s = char(root->val+'a')+s;
         
         if(!root->left and !root->right){
-            v.push_back(s);
+            ans = min(ans,s);
             return;
         }
         
