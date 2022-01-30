@@ -25,10 +25,9 @@ public:
     void dp(TreeNode* root, string s){
         if(!root)return;
         
-        s += char(root->val+'a');
+        s = char(root->val+'a')+s;
         
         if(!root->left and !root->right){
-            reverse(s.begin(),s.end());
             v.push_back(s);
             return;
         }
