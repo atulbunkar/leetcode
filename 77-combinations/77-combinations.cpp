@@ -11,13 +11,14 @@ public:
     void bt( vector<vector<int>>& ret , vector<int> t , int k,int n, int l){
         
         if(t.size()==k){
-            ret.push_back(t);
+    
+            ret.emplace_back(t);
             return;
         }
         
         for(int i= l; i<=n; i++){
             
-            t.push_back(i);
+            t.emplace_back(i);
             //cout<<l<< " " << i << " " << endl;
             bt(ret,t,k,n,i+1);
             // cout<<l<< " " << i << " " << endl;
