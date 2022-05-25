@@ -8,7 +8,7 @@ public:
         return ret;
     }
     
-    void bt( vector<vector<int>>& ret , vector<int>& t , int k,int n, int l){
+    void bt( vector<vector<int>>& ret , vector<int>& t , int& k,int& n, int l){
         
         if(t.size()==k){
     
