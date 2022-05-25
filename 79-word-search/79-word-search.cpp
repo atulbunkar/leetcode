@@ -21,7 +21,7 @@ public:
         
     }
     
-    void bt(vector<vector<char>>& board, string word, int curr , int i, int j, string str,vector<vector<int>>& vstd){
+    void bt(vector<vector<char>>& board, string& word, int curr , int i, int j, string str,vector<vector<int>>& vstd){
          if(str == word){
             found = true; return;
         }
