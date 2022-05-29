@@ -23,20 +23,20 @@ public:
         }
         
         t = head;
-        ListNode* t1 = head->next;  ListNode* last; vector<ListNode*> v;
+        ListNode* t1 = head->next;  ListNode* last; set<ListNode*> v;
         
         while(t and t1){
            
             if(st.empty())last = NULL;
             else {
                 last =  st.top(); st.pop();
-                 v.push_back(last);
+                 v.insert(last);
             }
             
             t->next = last;
             last->next = t1;
             
-            if(find(v.begin(),v.end(),t1->next) != v.end())break;
+            if(v.find(t1->next) != v.end())break;
          
             t = t1;
             t1 = t1->next;
