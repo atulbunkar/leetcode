@@ -23,7 +23,7 @@ public:
         }
         
         t = head;
-        ListNode* t1 = head->next;  ListNode* last; set<ListNode*> v;
+        ListNode* t1 = head->next;  ListNode* last; unordered_set<ListNode*> v;
         
         while(t and t1){
            
