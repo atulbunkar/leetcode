@@ -1,0 +1,1 @@
+GET 2 DP1 AND DP2 AND  calc  twice for len f and len s
