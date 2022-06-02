@@ -15,33 +15,15 @@ public:
         
         if(!root)return NULL;
         
-        if(root ==p || root == q){
-            ans = root;
-            return ans;
+        if(find(root->left,p) and find(root->left,q))
+           return lowestCommonAncestor(root->left,p,q);
+        else if(find(root->right,p) and find(root->right,q)){
+            return lowestCommonAncestor(root->right,p,q);
         }
         
-        l = find(root->left,p);
-        r = find(root->right,q);
+        return root;
         
-        if(l and r){
-            ans = root;
-            return ans;}
         
-        l = find(root->left,q);
-        r = find(root->right,p);
-        
-         if(l and r){
-            ans = root;
-            return ans;
-         }
-        
-        if(!ans)
-        lowestCommonAncestor(root->left,p,q);
-        
-        if(!ans)
-        lowestCommonAncestor(root->right,p,q);
-        
-        return ans;
         
     }
     
