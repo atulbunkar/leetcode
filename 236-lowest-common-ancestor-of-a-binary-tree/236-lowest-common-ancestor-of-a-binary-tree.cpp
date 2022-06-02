@@ -13,10 +13,10 @@ public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         bool l=false,r=false;
         
-        if(!root)return NULL;
+        if(!root || root==p || root==q)return root;
         
         if(find(root->left,p) and find(root->left,q))
-           return lowestCommonAncestor(root->left,p,q);
+            return lowestCommonAncestor(root->left,p,q);
         else if(find(root->right,p) and find(root->right,q)){
             return lowestCommonAncestor(root->right,p,q);
         }
