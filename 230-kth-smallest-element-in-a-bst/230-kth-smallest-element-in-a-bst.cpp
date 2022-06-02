@@ -1,22 +1,32 @@
-
 class Solution {
     int ans=0;
-    int c = 0;
+    bool flag = false;
 public:
     
     int kthSmallest(TreeNode* root, int k) {
         dfs(root,k);
         return ans;
     }
-    void dfs(TreeNode* root, int k){
+    
+    void dfs(TreeNode* root, int& k){
+        if(!root || flag)return ;
+        
+        dfs(root->left,k);
+        
+        k--;
+        if(k<0)return;
+        
+        if(k==0){
+            ans = root->val;
+            flag =true;
+        }
+        dfs(root->right,k);
+        
 
         
-        if(!root)return;
-        
-        dfs(root->left, k);
-        c++;
-        if(k==c and !ans)ans= root->val;
-              
-        dfs(root->right,k);
     }
+    
+              
+     
+    
 };
