@@ -2,23 +2,29 @@ class Solution {
 public:
     int maxProfit(vector<int>& p) {
         int n = p.size();
-        vector<int> s1(n+1),s2(n+1) ,s3(n+1) ;
+
+        vector<vector<int>> dp(n, vector<int>(2,0));  //n index , 2 for buy/sell state 
         
-        s1[0] = 0; s2[0] = -p[0] ; s3[0] = INT_MIN;
-        
-        for(int i=1; i<n ;i++){
-            
-            s1[i] = max(s3[i-1]  , s1[i-1]) ; //rest from s3 or rest in it only
-            
-            s2[i] = max(s1[i-1] -p[i]  , s2[i-1]) ; // buy from s1 or rest in s2
-            
-            s3[i] = s2[i-1]  + p[i]; //sell after buy from s2
-        }
-        
-        return max(s1[n-1],s3[n-1]);
-        
+        return dfs(p,dp,0,0);
     }
     
+    int dfs(vector<int>& p, vector<vector<int>>& dp  ,int i, int buy){
+        
+        if(i>=p.size())
+            return 0;
+        
+        if(dp[i][buy])return dp[i][buy];
+        
+        if(buy == 0){       //buy state
+            return dp[i][buy] = max(dfs(p,dp,i+1,1)-p[i] , dfs(p,dp,i+1,0)); //buy or dont buy
+            
+        }
+        
+        else{               //sell state
+            return dp[i][buy] = max(dfs(p,dp,i+2,0)  + p[i], dfs(p,dp,i+1,1)); //sell or dont sell
+        }
+        
+    }
     
        
         
