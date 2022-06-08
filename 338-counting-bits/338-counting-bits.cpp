@@ -8,7 +8,7 @@ public:
             
             while(j>0){
                 if(j%2 != 0)c++;
-                j /= 2;
+                j= j>>1;
             }
             ans[i] = c;
             
