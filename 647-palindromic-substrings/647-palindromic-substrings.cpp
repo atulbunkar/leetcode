@@ -19,13 +19,13 @@ public:
     
     bool ispalin(string& s,int i,int j,vector<vector<bool>>& dp){
         
-        //if(dp[i][j-1] and s[j]==s[i])return dp[i][j] = true;
+        if(i >= j)return true;
+        if(dp[i][j])return true;
             
-        int x = i , y = j;
-        while(i<j){
-            if(s[i++] != s[j--])return false;
-        }
-        return true ; //dp[x][y] = true;
+        if(s[i] != s[j])return false;
+        
+        else
+            return dp[i][j] = ispalin(s,i+1,j-1,dp);
         
     }
 };
