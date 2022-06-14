@@ -3,39 +3,42 @@ public:
     typedef unsigned long long int ull;
     int widthOfBinaryTree(TreeNode* root) {
         if(!root)return 0;
-        map<ull,pair<ull,ull>> mp; //lvl , max-min
-       
-        dfs(root,0,mp,1);
-        ull maxx = 0;
-        for(auto itr = mp.begin() ; itr != mp.end() ; itr++){
-            auto z = itr->second;
-            maxx = maxx > z.second-z.first+1 ? maxx : z.second-z.first+1 ;
-        }
-        return maxx;
         
-    }
-    
-    void dfs(TreeNode* root, ull lvl , map<ull,pair<ull,ull>>& mp,ull h){
-        if(!root)return;
+        deque<unsigned long long> idx ; deque<TreeNode*> nodes;
         
-        dfs(root->left,lvl*2,mp,h+1);
-        dfs(root->right,lvl*2+1,mp,h+1);
+        nodes.push_back(root); idx.push_back(0);
         
-        if(mp.find(h) == mp.end()){
-           mp[h] = make_pair(lvl,lvl);
-        }
-        else{
-            auto x = mp[h];
-           
-            x.second = x.second > lvl ? x.second:lvl; 
-            x.first = x.first < lvl ? x.first:lvl; 
-            mp[h] = x;
+        unsigned long long ans = 0;
+        while(nodes.size()>0){
             
+            int n = nodes.size();
+         
+            if(idx[n-1] - idx[0]+1 > ans)
+                ans = idx[n-1] - idx[0]+1 ;
+            
+            for(int i=0; i<n; i++){
+                
+                TreeNode* r = nodes.front();
+                unsigned long long id = idx.front(); 
+                
+                nodes.pop_front();
+                idx.pop_front();
+                
+                if(r->left){
+                    nodes.push_back(r->left);
+                    idx.push_back(2*id+1);
+                }
+                
+                if(r->right){
+                    nodes.push_back(r->right);
+                    idx.push_back(2*id+2);
+                }
+                
+            }
+    
         }
-        
+        return ans;
+    
     }
-    
-    
-    
     
 };
