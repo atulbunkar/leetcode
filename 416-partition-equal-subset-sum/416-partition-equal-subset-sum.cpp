@@ -2,7 +2,7 @@ class Solution {
 public:
     bool found = false;
     bool canPartition(vector<int>& arr) {
-        sort(arr.begin(),arr.end());
+        //sort(arr.begin(),arr.end());
         
         int n =arr.size();
         
