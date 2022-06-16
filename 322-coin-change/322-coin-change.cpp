@@ -1,35 +1,38 @@
 class Solution {
-public:
+public:             
     int ans = INT_MAX;
-    int coinChange(vector<int>& coins, int amount) {
-        //sort(coins.begin(), coins.end()); 
+    int coinChange(vector<int>& coins, int am) {
+        sort(coins.begin(), coins.end()); 
         int n = coins.size();
         
-        vector<vector<int>> dp(n,vector<int>(amount+1,-1)) ;
+        vector<vector<int>> dp(n+1,vector<int>(am+1,0)); //row - arr , col - amount
         
-        int x = dfs(0,coins,amount,0,dp);
+        for(int i=0;i<=n;i++)
+            dp[i][0] = 0;
+        
+        for(int i=0; i<=am;i++)
+            dp[0][i] = INT_MAX-1;
+        
+        dp[0][0] = INT_MAX-1;
+   
+        for(int a=1;a<=am;a++){
+            if(a%coins[0]==0)dp[1][a] = a/coins[0];
+            else
+                dp[1][a] = INT_MAX-1;
+        }
      
-        return x==INT_MAX-1 ? -1: x ;
-        
-    }
-    
-    int dfs(int i ,vector<int>& coins , int am, int t, vector<vector<int>>& dp){
-        
-        if(i >= coins.size() )return INT_MAX-1;
-        
-        if(am == 0){
-            return 0;
+        for(int i=2;i <=n;i++){
+            for(int j=1 ;j<= am;j++){
+             
+                if(coins[i-1] <= j){
+                    dp[i][j] = min(dp[i-1][j] , dp[i][j-coins[i-1]]+1);
+                }
+                else
+                    dp[i][j] = dp[i-1][j];
+                
+            }
         }
         
-        if(dp[i][am] != -1)return dp[i][am];
-  
-        if(coins[i] > am)
-            return dp[i][am] = dfs(i+1,coins,am,t,dp);
-        
-        else{
-            return dp[i][am] = min(dfs(i,coins,am-coins[i],t+1,dp)+1 ,dfs(i+1,coins,am,t,dp) );
-        }
-        
-        
+        return dp[n][am] == INT_MAX-1 ? -1 : dp[n][am];
     }
 };
