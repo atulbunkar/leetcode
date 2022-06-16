@@ -4,42 +4,38 @@ public:
     bool canPartition(vector<int>& arr) {
         sort(arr.begin(),arr.end());
         
+        int n =arr.size();
+        
         int sum =0;
         for(auto x:arr)sum += x;
          if(sum%2)return false;
         sum /= 2;
         
-
-        vector<vector<int>> mem(arr.size(), vector<int>(sum+1,0));
+        vector<vector<bool>> dp(n+1, vector<bool>(sum+1));
         
-        return dfs(0,arr,sum,mem); 
-    }
-
-    
-    bool dfs(int i,vector<int>arr, int sum, vector<vector<int>>& mem ){
-        
-        if(i>=arr.size())return false;
-        if(found)return true;
-        
-        if(sum==0){
-            found = true;
-            return true;
-        }
-        
-        if(mem[i][sum]){
-            return mem[i][sum] == 1? true:false ;
-        }
-        
-        if(arr[i] > sum){
-            return false;
-        }
+        dp[0][0] = true;
             
-        else{
-            bool x = dfs(i+1 ,arr,sum-arr[i],mem) || dfs(i+1,arr,sum,mem);
-            if(x)mem[i][sum] = 1;
-            else mem[i][sum] = 2;
-            return x;
+        for(int i= 1; i<=sum ;i++)
+            dp[0][i] = false;
+        
+        for(int i=1;i<=n ;i++)
+            dp[i][0] = true;
+    
+        
+        for(int i=1; i<=n ;i++){
+            
+            for(int j=1; j<=sum; j++){
+                
+                dp[i][j] = dp[i-1][j];
+                
+                if(arr[i-1]>j)continue;
+                
+                dp[i][j] = dp[i-1][j-arr[i-1]] || dp[i][j];
+                    
+            }
         }
+        return dp[n][sum];
+    
     }
         
     
