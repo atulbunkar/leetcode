@@ -1,46 +1,35 @@
 class Solution {
 public:
-    vector<vector<int>> mem;
-    int solve(vector<int>& obstacles, int pos, int lane)
-    {
-        if(pos == obstacles.size()-2)
-            return mem[pos][lane] = 0;
-        
-        if(mem[pos][lane] != -1)return mem[pos][lane];
-        
-        if(obstacles[pos+1]!=lane)
-        {
-            return  mem[pos][lane] = solve(obstacles, pos+1, lane);
-        }
-        if(obstacles[pos+1]==lane){
-            int l1=0, l2=0;
-            if(lane==1)
-            {
-                l1=2;
-                l2=3;
-            }
-            else if(lane==2)
-            {
-                l1=1;
-                l2=3;
-            }
-            else{
-                l1=1;
-                l2=2;
-            }
-            if(obstacles[pos]==l1)
-                return  mem[pos][lane] = 1 + solve(obstacles, pos+1, l2);
-            else if(obstacles[pos]==l2)
-                return mem[pos][lane]= 1 + solve(obstacles, pos+1, l1);
-            else
-                return mem[pos][lane] = 1 + min(solve(obstacles, pos+1, l1), solve(obstacles, pos+1, l2));
-        }
-        return 0;
-    }
+    vector<vector<int>> dp;
     
     int minSideJumps(vector<int>& o) {
-        mem.resize(o.size(), vector<int>(4,-1));
-        return solve(o, 0, 2);
+        dp.resize(o.size(), vector<int>(4,INT_MAX-1));
+        int n = o.size();
+        
+        dp[0][2] = 0;
+        
+        for(int i=1; i<n-1 ;i++ ){
+            
+            for(int lane = 1;lane<=3;lane++){
+                
+                if(o[i] == lane || o[i+1]==lane){
+                    dp[i][lane] = INT_MAX-1;
+                } 
+                else{
+                    int x ,y;
+                    if(lane == 1){x=2,y=3;}
+                    else if(lane ==2){x=1,y=3;}
+                    else{x=1;y=2;}
+                    
+                    dp[i][lane] = min(dp[i-1][lane] ,min(dp[i-1][x]+1 , dp[i-1][y]+1) );
+                }
+            
+            
+            }
+            
+        }
+        
+        return min(dp[n-2][1] , min(dp[n-2][2],dp[n-2][3] )) ;
     }
 
 };
