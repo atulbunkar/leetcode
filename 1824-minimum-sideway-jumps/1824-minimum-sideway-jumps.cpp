@@ -4,7 +4,7 @@ public:
     int solve(vector<int>& obstacles, int pos, int lane)
     {
         if(pos == obstacles.size()-2)
-            return 0;
+            return mem[pos][lane] = 0;
         
         if(mem[pos][lane] != -1)return mem[pos][lane];
         
