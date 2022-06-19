@@ -1,7 +1,6 @@
 class Solution {
 public:
     int longestSubsequence(string s, int k) {
-        vector<vector<int>> mem(s.size()+1, vector<int>(s.size()+1,-1));
          int n= s.size(); int ans=-1,p;
         int t =0;
         
