@@ -1,7 +1,8 @@
 class Solution {
 public:
     
-    vector<vector<int>> memo; int mem[1001][2][1001];
+   // vector<vector<int>> memo; 
+    int mem[1001][2][1001];
     int wiggleMaxLength(vector<int>& nums) {
         //memo.resize(nums.size()+1, vector<int>(2,-1) );
         
