@@ -14,9 +14,9 @@ public:
                 if(ispal(s,i,j)){
                     if(j-i+1 > ans.size()){
                         ans = s.substr(i,j-i+1);
-                        break;
+                        
                     }
-                    
+                    break;
                 }
             } 
         }
