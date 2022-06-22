@@ -17,7 +17,7 @@ public:
         if(mem[i][j] >-1)return mem[i][j];
         
         if(s[i] == s[j]){
-            return mem[i][j] = max(dp(s,i+1,j-1) +2 , max(dp(s,i+1,j), dp(s,i,j-1)) );   
+            return mem[i][j] = dp(s,i+1,j-1) +2 ;   
         }
         return mem[i][j] = max(dp(s,i+1,j) , dp(s,i,j-1));
 
