@@ -1,13 +1,11 @@
 class Solution {
 public:
-    vector<vector<int>> mem;
+    int mem[1001][1001] ;
     
     string longestPalindrome(string& s) {
         string ans = s.substr(0,1); 
-        
-        int n= s.size();
-        //memset(mem,-1,sizeof(mem));
-        mem.resize(n+1,vector<int>(n+1,-1));
+        memset(mem,-1,sizeof(mem));
+        int n= s.size() ;
         
         for(int i=0; i<n-1; i++){
             for(int j=n-1; j>i; j--){
@@ -15,7 +13,6 @@ public:
                 if(ispal(s,i,j)){
                     if(j-i+1 > ans.size()){
                         ans = s.substr(i,j-i+1);
-                        
                     }
                     break;
                 }
