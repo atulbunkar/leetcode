@@ -1,29 +1,26 @@
 class Solution {
 public:
+    
+  
+    int ans = 1; int mem[1001][1001];
     int longestPalindromeSubseq(string s) {
-        int n = s.size();
-        vector<vector<int>> dp(n,vector<int>(n)); 
-        int l = 0 ,r = n-1;
-        
-        return bt(l,r,dp , s);
-        
+        memset(mem,-1,sizeof(mem));
+        return dp(s,0,s.size()-1);
     }
     
-    int bt(int l, int r, vector<vector<int>>& dp , string& s){
+    int dp(string& s ,int i,int j){
         
-        if(l==r)return 1;
-        if(l>r)return 0;
+        if( j<i )return 0;
+    
+        if(j==i)return 1;
         
-        if(dp[l][r])return dp[l][r];
+        if(mem[i][j] >-1)return mem[i][j];
         
-        if(s[l]==s[r]){
-            return dp[l][r] = 2 + bt(l+1,r-1,dp,s);
+        if(s[i] == s[j]){
+            return mem[i][j] = max(dp(s,i+1,j-1) +2 , max(dp(s,i+1,j), dp(s,i,j-1)) );   
         }
-        
-            
-        return dp[l][r] = max( bt(l,r-1,dp,s), bt(l+1,r,dp,s) );
-     
-        
+        return mem[i][j] = max(dp(s,i+1,j) , dp(s,i,j-1));
+
         
     }
 };
