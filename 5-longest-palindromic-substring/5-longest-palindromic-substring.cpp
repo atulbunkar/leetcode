@@ -1,12 +1,13 @@
 class Solution {
 public:
-    int mem[1001][1001];
+    vector<vector<int>> mem;
     
     string longestPalindrome(string& s) {
         string ans = s.substr(0,1); 
         
         int n= s.size();
-        memset(mem,-1,sizeof(mem));
+        //memset(mem,-1,sizeof(mem));
+        mem.resize(n+1,vector<int>(n+1,-1));
         
         for(int i=0; i<n-1; i++){
             for(int j=n-1; j>i; j--){
