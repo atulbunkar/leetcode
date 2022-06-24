@@ -10,15 +10,10 @@ public:
         
         while(n--){
             if(s==g)return true;
-
             g =  g.back() + g  ; 
-            g.pop_back();
-            
+            g.pop_back(); 
         }
-        
-        
         return false;
-    
     }
     
 };
