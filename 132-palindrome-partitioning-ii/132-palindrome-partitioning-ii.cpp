@@ -20,7 +20,7 @@ public:
          
          int tmp = INT_MAX;
  
-        for(int i=s.size(); i>= x ; i--){
+        for(int i=x; i<s.size() ; i++){
             if(ispal(s, x, i)){    
                 tmp = min(all(s,i+1) +1,tmp ) ; //partition it and call for i+1 ,backtrack and check for longer strings
             }
@@ -28,7 +28,7 @@ public:
         return mem2[x] = tmp;   
     }
     
-    bool ispal(string& s, int i,int j){
+    bool ispal(string& s, int i,int j){ //after a few calls , our mem table is full to use
         if(j<=i)return 1;
         
         if(mem[i][j] != -1)return mem[i][j] ;
