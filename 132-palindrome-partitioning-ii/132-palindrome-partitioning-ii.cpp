@@ -11,18 +11,18 @@ public:
         
     }
     
-     int all(string& s ,int x){
+     int all(string& s ,int x){ //this code basically tells how many partitions can be done
         if(x>=s.size()){
-            return -1;
+            return -1; //-1 bcoz no of partitions -1 to return
         } 
          
         if(mem2[x]!=-1)return mem2[x];
          
          int tmp = INT_MAX;
  
-        for(int i=x; i< s.size() ; i++){
+        for(int i=s.size(); i>= x ; i--){
             if(ispal(s, x, i)){    
-                tmp = min(all(s,i+1) +1,tmp ) ; 
+                tmp = min(all(s,i+1) +1,tmp ) ; //partition it and call for i+1 ,backtrack and check for longer strings
             }
         } 
         return mem2[x] = tmp;   
