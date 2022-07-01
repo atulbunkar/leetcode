@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int mem[100001];
+    int mem[10001];
     int deleteAndEarn(vector<int>& nums) {
         map<int,int> mp;
         for(auto x:nums)mp[x]++; // num,count
