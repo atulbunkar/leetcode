@@ -34,11 +34,7 @@ public:
          for(auto &x:con){
             un(x[0],x[1]); 
          }
-        int need =0;
-        for(int i =0;i<n;i++){
-            if(pr[i]==-1)
-                need++;
-        }
+
         //cout<<set<<endl;
         if(set-1>cnt)
             return -1;
