@@ -1,10 +1,10 @@
 class Solution {
 public:
     int pr[1001];
-    //int sz[1001];
+    long long sz[1001];
     int cnt=0;
     int cost=0;
-    int set;
+
     int find(int v){
         //cout<<" 3";
         if(pr[v] == -1)
@@ -25,12 +25,12 @@ public:
             cnt++;
              return ;
         } 
-        // if(sz[a]<sz[b])
-        //     swap(a,b);
+        if(sz[a]<sz[b])
+            swap(a,b);
         
         pr[b] = a;
-       // sz[a] = sz[a]+sz[b];
-        set--;
+        sz[a] = sz[a]+sz[b];
+        
         cost += dis;
         return;
     }
