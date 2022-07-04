@@ -6,7 +6,7 @@ public:
         if(pr[v] == -1)
             return v;
         
-        return pr[v] = find(pr[v]);
+        return  find(pr[v]);
     }
     void un(int a,int b){
         a = find(a);
