@@ -4,9 +4,8 @@ public:
     int sz[27];
     int find(int v){
         if(pr[v] == -1)
-            return pr[v] = v;
-        if(pr[v] == v)
-            return pr[v] = v;
+            return v;
+        
         return pr[v] = find(pr[v]);
     }
     void un(int a,int b){
