@@ -1,7 +1,7 @@
 class Solution {
 public:
-    int pr[500];
-    int sz[500];
+    int pr[27];
+    int sz[27];
     int find(int v){
         if(pr[v] == -1)
             return pr[v] = v;
