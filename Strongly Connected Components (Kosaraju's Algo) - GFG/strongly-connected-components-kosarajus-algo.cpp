@@ -32,20 +32,23 @@ class Solution
         
         for(auto x:adj[i]){
             
-            if(stime[x]!=-1 and onstack[x]){
-                low[i] = min(low[i], stime[x]);
+            if(onstack[x]){ // back edge bcoz wo bhi current dfs me hai ,onstack me
+                low[i] = min(low[i], stime[x]); // to apna low uske start time kro
             }
             
-            else if(stime[x]==-1){
-                tarjan(x,adj,onstack,stime,low,t);
+            else if(stime[x]==-1){                  // tree edge
+                tarjan(x,adj,onstack,stime,low,t);  //age ke nodes pe call kro
                 
-                low[i] = min(low[i], low[x]);
+                low[i] = min(low[i], low[x]); //agey ke node me koi back edge mil gya to
+                                        // uska low apne se kam ho jaega
             }
             
         }
    
+        //wapas aane ke baad , agar stime == low , mtlb sabse upar ke baap ke paas.
+        //to sare stack walo ko khali kro jbtak baap ni nikal jata.
         if(low[i] == stime[i]){
-            Scc++;
+            Scc++; //one SCC found
             while(s.top() != i){
                 onstack[s.top()] = false;
                 s.pop();
