@@ -32,11 +32,11 @@ class Solution
         
         for(auto x:adj[i]){
             
-            if(onstack[x]){ // back edge bcoz wo bhi current dfs me hai ,onstack me
+            if(onstack[x]){   // back edge bcoz wo bhi current dfs me hai ,onstack me
                 low[i] = min(low[i], stime[x]); // to apna low uske start time kro
             }
             
-            else if(stime[x]==-1){                  // tree edge
+            if(stime[x]==-1){   // tree edge , not visited even once
                 tarjan(x,adj,onstack,stime,low,t);  //age ke nodes pe call kro
                 
                 low[i] = min(low[i], low[x]); //agey ke node me koi back edge mil gya to
