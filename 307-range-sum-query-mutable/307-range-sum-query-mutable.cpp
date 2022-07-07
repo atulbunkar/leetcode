@@ -6,7 +6,7 @@ public:
         int size = nums.size()+1;  
         int ht = ceil(log2(size)); 
         size = ceil(pow(2,ht+1)) ;
-         cout<<ht <<  " " << size; 
+        // cout<<ht <<  " " << size; 
         st.resize(size,0);
          make(0,0,nums.size()-1);
     }
@@ -37,7 +37,7 @@ public:
         if(l>j)return 0;
         if(r<i)return 0;
         
-        if(l<=i and r>=j){
+        if(l<=i and r>=j){ //tricky, l,r are range of query, i,j are range of index curr elemt holds
             return st[idx];
         }
         return sumr(l,r,i,(i+j)/2,2*idx+1) + sumr(l,r,(i+j)/2+1,j,2*idx+2);
