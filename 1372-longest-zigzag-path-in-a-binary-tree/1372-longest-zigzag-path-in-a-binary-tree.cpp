@@ -13,7 +13,7 @@ public:
     }
     
     int rec(TreeNode* r, int left){
-        if(mem[r][left] >0)return mem[r][left];
+        if(mem.find(r) != mem.end() and mem[r].find(left) != mem[r].end() )return mem[r][left];
         
         if(!r)return -1;
         
