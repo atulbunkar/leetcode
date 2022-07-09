@@ -1,7 +1,7 @@
 
 class Solution {
 public:
-    map<TreeNode* ,map<bool,int>> mem;
+    map<TreeNode* ,map<int,int>> mem;
     
     int longestZigZag(TreeNode* root) {
         return help(root);
@@ -12,7 +12,7 @@ public:
         return max({rec(r,0),rec(r,1) , help(r->left) , help(r->right) });
     }
     
-    int rec(TreeNode* r, bool left){
+    int rec(TreeNode* r, int left){
         if(mem[r][left] >0)return mem[r][left];
         
         if(!r)return -1;
