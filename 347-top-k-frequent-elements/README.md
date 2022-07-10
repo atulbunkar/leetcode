@@ -2,12 +2,12 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<pre><strong>Input:</strong> nums = [1,1,1,2,2,3], k = 2
+<pre style="position: relative;"><strong>Input:</strong> nums = [1,1,1,2,2,3], k = 2
 <strong>Output:</strong> [1,2]
-</pre><p><strong>Example 2:</strong></p>
-<pre><strong>Input:</strong> nums = [1], k = 1
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper" bis_skin_checked="1"></div></pre><p><strong>Example 2:</strong></p>
+<pre style="position: relative;"><strong>Input:</strong> nums = [1], k = 1
 <strong>Output:</strong> [1]
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper" bis_skin_checked="1"></div></pre>
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
