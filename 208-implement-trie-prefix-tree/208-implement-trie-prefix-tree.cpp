@@ -20,24 +20,16 @@ public:
     void insert(string word) {
         int n =word.size();
         TrieNode* r = root;
-        insrt(0,word,r);
+        for(auto x:word){
+            if(r->child.count(x))r = r->child[x];
+            else{
+                r->child[x] = new TrieNode();
+                r = r->child[x];
+            }
+        }
+        r->islast = true;
     }
     
-    void insrt(int i, string& word, TrieNode* r){
-        if(i==word.size()) return;
-        
-        if(r->child.count(word[i])){
-            if(i==word.size()-1)r->child[word[i]]->islast = true;  
-            insrt( i+1,word,r->child[word[i]] );
-        }
-        else{
-            r->child[word[i]] = new TrieNode(i==word.size()-1);
-            insrt(i+1,word,r->child[word[i]]);
-        }
-        
-        
-        //cout<< word[i] << " " << r->child.size()<<endl;
-    }
     
     
     bool search(string word){
