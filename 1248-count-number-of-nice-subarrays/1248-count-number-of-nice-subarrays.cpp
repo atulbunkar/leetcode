@@ -7,23 +7,19 @@ public:
         int n = nums.size();
         
        
-        for(auto &x:nums){
-            x = x%2;
-        }
-        
         for(i;i<n;i++){
             
-            if(nums[i])k1++;
+            if(nums[i]%2)k1++;
             
             if(k1>=k){
                 c = 1;
-                while(j<i and nums[j]==0){
+                while(j<i and nums[j]%2==0){ //subarray count for prev nums
                     c++; j++;
                 }
                 j++; k1--;
                 
-                m = i+1; int t =c;
-                while(m<n and nums[m]==0){
+                m = i+1; int t =c;   //subarry count for for ahead nums .
+                while(m<n and nums[m]%2==0){
                     c += t; m++;
                 }
                   
