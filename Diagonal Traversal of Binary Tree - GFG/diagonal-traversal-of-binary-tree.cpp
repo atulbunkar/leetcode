@@ -121,26 +121,27 @@ struct Node
 }; */
 
 
-void fun(Node *r,int l,vector<vector<int>>&ans){
-    if(!r)  return;
-    if(l>=ans.size()){
-        ans.push_back({});
-    }
-    ans[l].push_back(r->data); 
-    
-    fun(r->left, l+1, ans);
-    fun(r->right, l, ans);
-    return;    
-}
 vector<int> diagonal(Node *root)
 {
-  vector<vector<int>>ans;
-  fun(root,0,ans);
-  vector<int> a;
-  for(auto x:ans){
-      for(auto pa:x)
-        a.push_back(pa);
-  }
-  return a;
-  
+   vector<int> ans; queue<Node*> q;
+   
+   Node* r = root;
+   
+   q.push(r); 
+   
+   while(!q.empty()){
+       
+       auto x = q.front(); q.pop();
+       
+       while(x){
+           ans.push_back(x->data);
+           
+           if(x->left)
+                q.push(x->left);
+                
+           x = x->right;
+       }
+       
+   }
+   return ans;
 }
