@@ -7,7 +7,7 @@
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
-<pre><span style="font-size:18px"><strong>Input</strong> :
+<pre style="position: relative;"><span style="font-size:18px"><strong>Input</strong> :
 &nbsp;           8
 &nbsp;        /     \
 &nbsp;       3      10
@@ -17,10 +17,10 @@
 &nbsp;       4     7 13
 <strong>Output</strong> : 8 10 14 3 6 7 13 1 4
 <strong>Explanation</strong>:
-<a href="http://d1hyf4ir1gqw6c.cloudfront.net//wp-content/uploads/unnamed1.png" target="_blank" bis_size="{&quot;x&quot;:30,&quot;y&quot;:730,&quot;w&quot;:406,&quot;h&quot;:21,&quot;abs_x&quot;:30,&quot;abs_y&quot;:730}"><img alt="unnamed" class="alignnone size-full wp-image-137695 img-responsive" src="https://contribute.geeksforgeeks.org/wp-content/uploads/diagonal.jpg" style="height: 264px; width: 406px; left: -10000px !important; position: absolute !important;" bis_size="{&quot;x&quot;:30,&quot;y&quot;:611,&quot;w&quot;:406,&quot;h&quot;:264,&quot;abs_x&quot;:30,&quot;abs_y&quot;:611}" bis_id="bn_qsnos88xqakxg26jgz5i1d">
+<a href="http://d1hyf4ir1gqw6c.cloudfront.net//wp-content/uploads/unnamed1.png" target="_blank" bis_size="{&quot;x&quot;:20,&quot;y&quot;:982,&quot;w&quot;:406,&quot;h&quot;:21,&quot;abs_x&quot;:20,&quot;abs_y&quot;:982}"><img alt="unnamed" class="alignnone size-full wp-image-137695 img-responsive" src="https://contribute.geeksforgeeks.org/wp-content/uploads/diagonal.jpg" style="height: 264px; width: 406px; left: -10000px !important; position: absolute !important;" bis_size="{&quot;x&quot;:20,&quot;y&quot;:734,&quot;w&quot;:406,&quot;h&quot;:264,&quot;abs_x&quot;:20,&quot;abs_y&quot;:734}" bis_id="bn_dbapjwhja8gwe8rbx5xcgm">
 </a>Diagonal Traversal of binary tree : 
  8 10 14 3 6 7 13 1 4</span>
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper" bis_skin_checked="1"></div></pre>
 
 <p><span style="font-size:18px"><strong>Your Task:</strong><br>
 You don't need to read input or print anything. The task is to complete the function<strong> diagonal()&nbsp;</strong>that takes the root node<strong>&nbsp;</strong>as input argumets<strong> </strong>and returns the diagonal traversal of the given tree.</span></p>
