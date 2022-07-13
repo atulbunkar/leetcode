@@ -21,17 +21,17 @@ class Solution
         if(M>=N)return nums[N-1];
         
         while(min<=max){
-            int mid = min+ (max-min)/2;
+            int mid = (max+min)/2; // mid is c
             int run =0; int k=M; bool f = false; int p=0;
            // cout<< mid << "-> ";
             for(int i=0;i<N;i++){
                 
-                if(run+nums[i] > mid ){
+                if(run+nums[i] > mid ){ //check if adding curr num will overflow mid
                     if(k==1 || nums[i]>mid){f = true;break;}
                     else k--;
-                    run = nums[i];
+                    run = nums[i]; //tricky part , set to curr num after partition
                 }
-                else
+                else                //only run sum when no partition
                     run += nums[i];
             }    
             //cout << f<< " ";
