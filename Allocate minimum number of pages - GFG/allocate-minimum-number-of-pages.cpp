@@ -21,7 +21,7 @@ class Solution
         if(M>=N)return nums[N-1];
         
         while(min<=max){
-            int mid = (max+min)/2; // mid is c
+            int mid = (max+min)/2; // mid is curr 
             int run =0; int k=M; bool f = false; int p=0;
            // cout<< mid << "-> ";
             for(int i=0;i<N;i++){
