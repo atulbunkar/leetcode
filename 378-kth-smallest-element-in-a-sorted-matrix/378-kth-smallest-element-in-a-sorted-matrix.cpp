@@ -1,26 +1,32 @@
 class Solution {
 public:
-    int kthSmallest(vector<vector<int>>& mat, int k) {
-        priority_queue<int> pq; int n= mat.size() , m= mat[0].size();
+    int kthSmallest(vector<vector<int>>& m, int need) {
+        int r = m.size() , c = m[0].size();
+        long long low=INT_MIN, high=INT_MAX;
         
-        if(n==1)return mat[0][k-1];
-        int ans ;
         
-        int i= 0, j=0;
-        
-        for(int i=0; i<n ;i++)
-            for(int j=0; j<m ;j++){
-                if(pq.size() < k)           //not reached k elements
-                    pq.push(mat[i][j]);
-                
-                else{   //k elements in pq 
-                    if(mat[i][j] < pq.top()  ){  //curr element is less than largest element
-                        pq.pop(); pq.push(mat[i][j]); // remove largest and fill curr
-                    }
-                       
-                }
+        while(low<=high){
+            
+            int mid = (low+high)/2;
+            int prev=0;
+           
+            for(int i=0;i<r;i++){
+               auto it = upper_bound(m[i].begin(),m[i].end(),mid); 
+               prev += it - m[i].begin();
             }
-        return pq.top();
+           // cout<< low << " "  << high<< " "<< prev<< endl;
+            if(prev>=need){
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
+            }
+    
+        }
+        return low;
+            
+        
+        
         
     }
 };
