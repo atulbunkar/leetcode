@@ -27,7 +27,7 @@ int kthSmallest(int arr[], int l, int r, int k)
             }
             
         }
-        ans;
+        return min;
         
     }
 
