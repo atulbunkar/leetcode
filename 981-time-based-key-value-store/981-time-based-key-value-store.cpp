@@ -6,7 +6,7 @@ public:
     }
     
     void set(string key, string value, int t) {
-        mp[key][t] =value;
+        mp[key].emplace(t,value);
     }
     
     string get(string key, int t) {
