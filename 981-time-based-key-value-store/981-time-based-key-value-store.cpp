@@ -6,7 +6,7 @@ public:
     }
     
     void set(string key, string value, int t) {
-        mp[key].insert({t,value});
+        mp[key][t] =value;
     }
     
     string get(string key, int t) {
@@ -25,7 +25,7 @@ public:
         int r= bs(key,mid+1,maxx);
         if(r>-1)return r;
         
-        int l =bs(key,minn,mid-1);
+        int l =bs(key,minn,mid-1); //only search in left when not in right;
         return l;
         
         
