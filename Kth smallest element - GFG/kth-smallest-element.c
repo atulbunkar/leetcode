@@ -11,7 +11,7 @@ int kthSmallest(int arr[], int l, int r, int k)
         int max = 1e5;  int n = r-l+1;
         int min = 1;    int ans;
         
-        while(min<=max){
+        while(min<max){
             
             int mid = (min+max)/2; int small=0;
             
@@ -19,7 +19,7 @@ int kthSmallest(int arr[], int l, int r, int k)
             
             if(small>=k){
                 ans = mid;
-                max = mid-1;
+                max = mid;
             }
             else{
                
