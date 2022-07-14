@@ -11,7 +11,7 @@ public:
             int sum=0;
             for(int i=0;i<n;i++){
                 sum+=ceil((double)nums[i]/mid);
-                if(sum>threshold)break;
+                //if(sum>threshold)break;
             }
             if( sum <= threshold ){
                 r = mid -1;
