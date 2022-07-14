@@ -1,6 +1,6 @@
 class TimeMap {
 public:
-    unordered_map<string,unordered_map<int,string>> mp;
+    map<string,map<int,string>> mp;
     TimeMap() {
         
     }
@@ -12,8 +12,12 @@ public:
     string get(string key, int t) {
         if(!mp.count(key))return "";
         int minn = 1, maxx = t;
-        int ans = bs(key,minn,maxx);
-        return (ans==-1)?"": mp[key][ans];
+        //int ans = bs(key,minn,maxx);
+        
+        auto it = mp[key].upper_bound(t);
+        
+        return it == mp[key].begin()?"" : (--it)->second;
+       // return (ans==-1)?"": mp[key][ans];
     }
     
     int bs(string& key,int minn,int maxx){
