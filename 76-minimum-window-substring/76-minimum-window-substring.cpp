@@ -10,10 +10,10 @@ public:
         int j=0,i=0;
         
         while(i<n){ 
-            if( mp[s[i] -'A']-- >0 ){
+            if( mp[s[i] -'A'] >0 ){ 
                 cnt--;
-             
-            }      
+            }  
+             mp[s[i] -'A']--; //this will red for all chars anyway
             
             while(cnt==0){
                 if(i-j < len){
@@ -21,9 +21,10 @@ public:
                     ans = s.substr(j,i-j+1);
                 }
                 
-                if(mp[s[j]-'A']++ ==0){
+                if(mp[s[j]-'A'] ==0){ 
                     cnt++;
                 }
+                mp[s[j]-'A']++ ; //this will add for all char anyway
                 j++;
             }
             i++;
