@@ -3,16 +3,19 @@ public:
     void moveZeroes(vector<int>& nums) {
         int n=nums.size(); int k=0;
         
-        for(auto it=nums.begin(); it!=nums.end();){
-            if(*it==0){
-                nums.erase(it); k++;
-            }
-            else
-                it++;
+        int i=0,j=0;  
+        
+        while(j<n and i<n){
+            
+            while(j<n and nums[j]==0)j++;
+             if(j==n)break;
+            
+            nums[i++] = nums[j++];
+            
         }
         
-        while(k>0){
-            nums.push_back(0);k--;
-        }
+        for(i;i<n;i++)
+            nums[i] = 0;
+        
     }
 };
