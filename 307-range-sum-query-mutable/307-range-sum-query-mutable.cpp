@@ -1,67 +1,45 @@
 class NumArray {
 public:
-    vector<int> nums;  vector<int> st;
-    NumArray(vector<int>& num){
-        nums = num;
-        int size = nums.size()+1;  
-        int ht = ceil(log2(size)); 
-        size = ceil(pow(2,ht+1)) ;
-        // cout<<ht <<  " " << size; 
-        st.resize(size,0);
-         make(0,0,nums.size()-1);
-    }
-    
-    int make(int idx, int i,int j){
+    vector<int> bit; int n; 
+    NumArray(vector<int>& nums) {
+        n = nums.size();
+        bit.resize(n+1,0);
         
-        if(i==j){
-            return st[idx] = nums[i];
+        for(int i=0;i<n;i++){
+            create(i+1,nums[i]);
         }
-        return st[idx] = make( 2*idx+1 ,i,(i+j)/2 ) + make( 2*idx+2, (i+j)/2+1,j ) ;
         
     }
     
-    void update(int index, int val) {
-        int diff = val - nums[index];
-        nums[index] = val;
-        updt(0,0,nums.size()-1, index, diff);
+    void create(int index, int val) {
+        for(int i=index;i<bit.size();){
+            bit[i] += val;
+            i += (i&-i);
+        } 
     }
+    
+    void update(int index, int val){
+         int diff = val - ( sum(index+1) - sum(index));
+      
+         for(int i=index+1;i<bit.size();){
+            bit[i] += diff;
+            i += (i&-i);
+        } 
+    }
+    
     
     int sumRange(int left, int right) {
-        
-        int i=0, j= nums.size()-1, idx = 0;
-        return sumr(left,right, i,j,idx);
-        
+        return sum(right+1) - sum(left);
     }
     
-    int sumr(int l,int r, int i,int j,int idx){
-        if(l>j)return 0;
-        if(r<i)return 0;
-        
-        if(l<=i and r>=j){ //tricky, l,r are range of query, i,j are range of index curr elemt holds
-            return st[idx];
+    int sum(int idx){       //returns sum 1->idx
+        if(idx<=0)return 0;
+        int ans =0; 
+        for(int i=idx;i>0;){ //BIT size is n+1
+            ans += bit[i];
+            i -= (i&-i);
         }
-        return sumr(l,r,i,(i+j)/2,2*idx+1) + sumr(l,r,(i+j)/2+1,j,2*idx+2);
-        
+        return ans;
     }
-    
-    void updt(int idx,int i,int j, int changeidx, int diff){
-        
-        if(idx >= st.size() || j< changeidx || i > changeidx)return ;
-        
-        if(j>=changeidx and i<= changeidx){
-            st[idx] = st[idx]+diff;
-        }
-        if(i==j)return;
-        
-        updt(2*idx+1,i,(i+j)/2 , changeidx,diff );
-        updt(2*idx+2,(i+j)/2+1 ,j, changeidx,diff );
-    }
-   
 };
 
-/**
- * Your NumArray object will be instantiated and called as such:
- * NumArray* obj = new NumArray(nums);
- * obj->update(index,val);
- * int param_2 = obj->sumRange(left,right);
- */
