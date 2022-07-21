@@ -2,7 +2,7 @@ class Solution {
 public:
     int mem[102][102][202];
     
-    bool isInterleave(string s1, string s2, string s3 ,int i=0, int j=0 ,int k=0) {
+    bool isInterleave(string& s1, string& s2, string& s3 ,int i=0, int j=0 ,int k=0) {
         
         if(k==0)
             memset(mem,-1,sizeof(mem));
