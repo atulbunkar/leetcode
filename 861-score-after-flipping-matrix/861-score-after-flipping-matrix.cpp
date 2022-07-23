@@ -36,13 +36,13 @@ public:
     
     void swapp(vector<vector<int>>& g, int i){
         for(int j =0; j< g[0].size(); j++)
-            g[i][j] ^= 1;
+            g[i][j] = 1-g[i][j];
     }
     
     void swapp2(vector<vector<int>>& g, int j){
         
         for(int i=0;i<g.size();i++)
-            g[i][j] ^= 1;
+            g[i][j] = 1-g[i][j];
         
     }
  
