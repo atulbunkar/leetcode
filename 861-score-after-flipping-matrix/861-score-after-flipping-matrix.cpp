@@ -8,7 +8,7 @@ public:
                 swapp(g,i);
         }
          
-       for(int j=1;j<m;j++){
+       for(int j=0;j<m;j++){
            bool colz = col0(g,0,j);
            if(colz)swapp2(g,j);
        }
