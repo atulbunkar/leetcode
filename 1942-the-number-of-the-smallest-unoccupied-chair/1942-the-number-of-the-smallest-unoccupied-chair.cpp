@@ -7,8 +7,8 @@ public:
 
     int smallestChair(vector<vector<int>>& t, int idx) {
         vector<vector<int>> v;
-        map<int,int>  sc; //st , chair
-        map<int,vector<int>> es; //end ,st
+        unordered_map<int,int>  sc; //st , chair
+        unordered_map<int,vector<int>> es; //end ,st
         
         int tar = t[idx][0];
         
