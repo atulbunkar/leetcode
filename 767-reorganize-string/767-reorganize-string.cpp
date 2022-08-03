@@ -1,49 +1,50 @@
 class Solution {
-	static bool compare(pair<char, int>p1, pair<char, int>p2) {
-		return p1.second > p2.second;
-	}
 public:
-	string reorganizeString(string S) {
-	    vector<int> cnt(26,0);
-	    
-        for(auto c:S)cnt[c-'a']++;
+    string reorganizeString(string s) {
+        unordered_map<char,int> mp;
+        priority_queue<pair<int,char>> pq;
         
-        int n = S.size();
-        int mx = *max_element(cnt.begin(), cnt.end());
+        for(auto x :s)
+            mp[x]++;
         
-        if(mx * 2 > S.size()+1)return "";
+        for(auto x:mp)
+            pq.push({x.second,x.first});
         
-        priority_queue<pair<int,int>> pq;
+        int n = s.size();
         
-        for(int i=0; i<26;i++){
-            if(cnt[i])
-                pq.push(make_pair(cnt[i] , i ));
-        }
+        if(pq.top().first > ceil(n*1.0/2))return "";
         
-        vector<bool> vstd(n,false);
-        int i=0;
+        string a ="";
         
         while(!pq.empty()){
-            int x = pq.top().second ;
-            int count = pq.top().first ;
+            auto x = pq.top();
             pq.pop();
-             while(count--){ 
-                if(i>=S.size())i=0;
-                while(vstd[i]){
-                    i++;
-                    if(i>=S.size())i=0;
+            if(a.empty()){
+                a += x.second;
+                if(x.first>1)
+                        pq.push({x.first-1,x.second});
+            }
+            else{
+                if(a.back() == x.second)
+                {
+                    auto y = pq.top(); pq.pop(); pq.push(x);
+                    a += y.second;
+                    if(y.first>1)
+                        pq.push({y.first-1,y.second});
+                            
                 }
-                vstd[i] = true;
-                S[i] = x +'a';
-                i +=2;
+                else{
+                     a += x.second;
+                     if(x.first>1)
+                        pq.push({x.first-1,x.second});
+                    
+                }
                 
             }
+             
         }
         
-        
-        
-        return S;
+        return a;
         
     }
-
 };
