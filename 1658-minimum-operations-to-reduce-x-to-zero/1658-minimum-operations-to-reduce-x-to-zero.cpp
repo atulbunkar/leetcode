@@ -9,7 +9,7 @@ public:
         for(int i=0;i<n;i++)
             s = (long long)nums[i] + s;
         
-        if(x>s)return -1;
+        //if(x>s)return -1;
         int want = s -x;
         
         map<long long ,int> mp; // sum,idx
@@ -18,13 +18,14 @@ public:
         int j=0;
         for(int i=0;i<n;i++){
             ss = (long long)nums[i] + ss;
+            mp[ss] = i;
             
-            while(ss>want){
-                ss = ss - (long long)nums[j++] ;
+            if(mp.count(ss-want)){
+                a = max(a, i-mp[ss-want]);
             }
             
-            if(ss == want)
-                a = max(a,i-j+1);            
+            
+            
         }
         return a == -1? -1: n-a;
            
