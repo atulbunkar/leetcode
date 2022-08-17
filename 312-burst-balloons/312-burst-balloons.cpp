@@ -1,29 +1,34 @@
 class Solution {
 public:
-    int mem[303][303];
-    int maxCoins(vector<int>& nums) {
-        memset(mem,-1,sizeof(mem));
-        int n=nums.size();
-        
-        return dp(0,n-1,nums);
+   // int meme[][];
+    int helper(vector<int> &nums,int i, int j, vector<vector<int>> &dp)
+    {
+        if(i > j)
+            return 0;
+        if(dp[i][j] != -1) return dp[i][j];
+        int ans = 0;
+        int l = (i==0)?1:nums[i-1];
+        int r = (j==nums.size()-1)?1:nums[j+1];
+        // if(i==j)
+        // {
+        //     return nums[i]*l*r;
+        // }
+        for(int k = i; k <= j; k++)
+        {   
+            int left = helper(nums,i,k-1,dp);
+            int right = helper(nums,k+1,j,dp);
+            ans = max(ans,left+(nums[k]*l*r)+right);
+        }
+        return dp[i][j] = ans;
     }
     
-    int dp(int i,int j ,vector<int>& nums){
-        
-        if(i>j)return 0;
-        if(mem[i][j] != -1)return mem[i][j];
-        int ans = 0;
-        for(int k=i;k<=j;k++)
-        {
-            int l,r , prod;
-            if(i==0)l=1; else l = nums[i-1];
-            if(j==nums.size()-1)r=1; else r = nums[j+1];
-            
-            prod = nums[k] *l*r;
-            
-            ans = max({ans, dp(i,k-1,nums)+ prod + dp(k+1,j,nums) });
-        }
-        return mem[i][j] = ans;
+    int maxCoins(vector<int>& nums) {
+        int n =nums.size();
+        vector<vector<int>>dp(nums.size(),vector<int>(nums.size(),-1));
+        return helper(nums,0,n-1,dp);
         
     }
+    
+        
+        
 };
