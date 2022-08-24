@@ -20,7 +20,7 @@ public:
         //if(i<0 || j<0 || i>=mt.size() || j>= mt[0].size())return INT_MIN;
         int ans=1;
         if(mem[i][j] !=-1)return mem[i][j];
-        v[i][j] =1;
+        //v[i][j] =1;
         
         for(int k=0;k<4;k++){
             int ii = i+dir[k][0]; int jj = j+dir[k][1];
@@ -32,7 +32,7 @@ public:
             }
         }
         
-        v[i][j] = 0;
+       // v[i][j] = 0;
         return mem[i][j] = ans;
     }
     
