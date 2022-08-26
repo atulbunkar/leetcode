@@ -2,11 +2,12 @@
 class Solution {
 public:
     
-    unordered_map<int,int> odds; //ele , count
-   // int odd[100001]
+   // unordered_map<int,int> odds; //ele , count
+    int odd[100001] ; int mx = -1;
         int ans=0;
         
     int pseudoPalindromicPaths (TreeNode* root) {
+        memset(odd,0,sizeof(odd));
         dfs(root);
         return ans;
     }
@@ -16,24 +17,21 @@ public:
         
         if(!r)return;
         
-        odds[r->val]++;
+        mx = max(mx,r->val);
+        odd[r->val]++;
         
          if(!r->left and !r->right){
-           
              int o = 0;
-             for(auto& x:odds){
-                 if(x.second%2)o++;
+             for(int i=0;i<=mx;i++){
+                 if(odd[i]%2)o++;
              }
              if(o<=1)ans++;
-           
         }
         
         dfs(r->left);
-        
         dfs(r->right);
-        
-        odds[r->val]--;
-        if(odds[r->val]<=0)odds.erase(r->val);
+        odd[r->val]--;
+        if(odd[r->val] <0)odd[r->val] =0; 
         
     }
     
