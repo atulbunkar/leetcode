@@ -21,7 +21,7 @@ public:
          if(!r->left and !r->right){
            
              int o = 0;
-             for(auto x:odds){
+             for(auto& x:odds){
                  if(x.second%2)o++;
              }
              if(o<=1)ans++;
