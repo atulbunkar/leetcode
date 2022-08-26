@@ -1,52 +1,35 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+
 class Solution {
 public:
-    int ans = -1;
+    int ans = 0;
+    
     int maxAncestorDiff(TreeNode* root) {
-        maxdfs(root);
-        mindfs(root);
+
+        h(root);
         return ans;
     }
     
-    int maxdfs(TreeNode* root){
-        if(!root)return -1;
-        if(!root->left and !root->right)return root->val;
-         int x=-1,y=-1;
+    pair<int,int> h(TreeNode* r){
+        int k = r->val;
+        pair<int,int> a = {k,k} ,b= {k,k};
         
-         x = maxdfs(root->left) ; 
-         y = maxdfs(root->right) ; 
-            
-         x = max(x,y);
+        if(r->left) 
+            a = h(r->left);
         
-         if(x>-1)ans = max(ans , abs(root->val - x));
+        if(r->right)
+            b = h(r->right);
         
-         return max(root->val , x);
+        int x = a.first , y = b.first;
+        int x1 = a.second , y1 = b.second;
+        
+        ans = max({ans , abs(r->val-x) , abs(r->val-y) });
+        
+        ans = max({ans , abs(r->val-x1) , abs(r->val-y1) });
+        
+        int ret1 = min({k,x,y});
+        int ret2 = max({k,x1,y1});
+        
+        return {ret1,ret2};
+        
     }
-    
-     int mindfs(TreeNode* root){
-        if(!root)return INT_MAX;
-        if(!root->left and !root->right)return root->val;
-         int x=-1,y=-1;
-        
-         x = mindfs(root->left) ; 
-         y = mindfs(root->right) ; 
-            
-         x = min(x,y);
-        
-         if(x<INT_MAX)ans = max(ans , abs(root->val - x));
-        
-         return min(root->val , x);
-    }
-    
-    
 };
