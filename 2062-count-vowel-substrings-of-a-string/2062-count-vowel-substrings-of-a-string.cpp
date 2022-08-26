@@ -27,7 +27,7 @@ public:
             
         }
         
-        while(j<=i and mp.size() ==5){
+        while(mp.size() ==5){
             ans++;
 
             if(mp[w[j]]-- == 1)mp.erase(w[j]); j++;
