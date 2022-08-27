@@ -2,7 +2,7 @@ class Solution {
 public:
     int maximumUniqueSubarray(vector<int>& nums) {
         int n = nums.size();
-        vector<long long> pref(n,0) ; 
+        vector<int> pref(n,0) ; 
         pref[0] = nums[0];
        
         for(int i=1;i<n;i++){
@@ -12,7 +12,7 @@ public:
         
         unordered_map<int,int> mp; //ele, count;
         
-        long long ans = -1,j=0;
+        int ans = -1,j=0;
         
         for(int i=0; i<n;i++){
             
@@ -23,7 +23,7 @@ public:
                 j++;
             }
             
-            long long s = pref[i] - ( (j>0) ?pref[j-1] : 0 );
+            int s = pref[i] - ( (j>0) ?pref[j-1] : 0 );
             
             ans = max(ans, s);
             
