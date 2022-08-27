@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int maximumUniqueSubarray(vector<int>& nums) {
+        int n = nums.size();
+        vector<long long> pref(n,0) ; 
+        pref[0] = nums[0];
+       
+        for(int i=1;i<n;i++){
+            pref[i] = pref[i-1] + nums[i];
+            //cout<< pref[i] << " ";
+        }
+        
+        map<int,int> mp; //ele, count;
+        
+        long long ans = -1,j=0;
+        
+        for(int i=0; i<n;i++){
+            
+            mp[nums[i]]++;
+            
+            while(j<i and mp[nums[i]]>1){
+                mp[nums[j]]--;
+                j++;
+            }
+            
+            long long s = pref[i] - ( (j>0) ?pref[j-1] : 0 );
+            
+            ans = max(ans, s);
+            
+        }
+        
+        return ans;
+        
+    }
+};
