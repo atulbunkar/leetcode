@@ -5,10 +5,7 @@ public:
         vector<int> pref(n,0) ; 
         pref[0] = nums[0];
        
-        for(int i=1;i<n;i++){
-            pref[i] = pref[i-1] + nums[i];
-            //cout<< pref[i] << " ";
-        }
+        int temp =0;
         
         unordered_map<int,int> mp; //ele, count;
         
@@ -16,16 +13,18 @@ public:
         
         for(int i=0; i<n;i++){
             
-            mp[nums[i]]++;
+            mp[nums[i]]++; temp += nums[i];
             
             while(j<i and mp[nums[i]]>1){
                 mp[nums[j]]--;
+                temp -= nums[j];
                 j++;
+                
             }
             
-            int s = pref[i] - ( (j>0) ?pref[j-1] : 0 );
+          //  int s = pref[i] - ( (j>0) ?pref[j-1] : 0 );
             
-            ans = max(ans, s);
+            ans = max(ans, temp);
             
         }
         
