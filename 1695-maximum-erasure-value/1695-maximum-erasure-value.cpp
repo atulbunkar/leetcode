@@ -10,7 +10,7 @@ public:
             //cout<< pref[i] << " ";
         }
         
-        map<int,int> mp; //ele, count;
+        unordered_map<int,int> mp; //ele, count;
         
         long long ans = -1,j=0;
         
