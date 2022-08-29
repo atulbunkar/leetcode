@@ -8,7 +8,7 @@ public:
         int n = ga.size();
         vector<unordered_map<char,int>> v;
         
-        for(auto x:ga){
+        for(auto& x:ga){
             unordered_map<char,int> mp;
             for(auto c:x){
                 mp[c]++;
@@ -16,7 +16,7 @@ public:
             v.push_back(mp);
         }
         
-        for(auto x:kk){
+        for(auto& x:kk){
             int tmp =0; 
             
             for(int i=0;i<n;i++){
