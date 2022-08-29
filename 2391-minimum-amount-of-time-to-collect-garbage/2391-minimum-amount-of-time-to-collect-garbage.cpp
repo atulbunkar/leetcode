@@ -6,10 +6,10 @@ public:
         vector<char> kk = {'P', 'G', 'M'};  
         
         int n = ga.size();
-        vector<map<char,int>> v;
+        vector<unordered_map<char,int>> v;
         
         for(auto x:ga){
-            map<char,int> mp;
+            unordered_map<char,int> mp;
             for(auto c:x){
                 mp[c]++;
             }
