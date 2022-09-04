@@ -5,7 +5,7 @@ public:
         
         int idx=0;
         
-        for(auto x:s){
+        for(auto& x:s){
             if(x==c)cc.push_back(idx);
             idx++;
         }
