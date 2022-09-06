@@ -30,7 +30,7 @@ public:
         
         if(prev[0] != -1){
             
-            if(cu[i][1] < prev[1] || cu[i][2] < prev[2])
+            if(cu[i][0] <prev[0] || cu[i][1] < prev[1] || cu[i][2] < prev[2])
                 return mp[k] = dp(i+1,prev,cu) ;
             
             
