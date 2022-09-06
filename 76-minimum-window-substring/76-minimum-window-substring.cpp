@@ -1,35 +1,31 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-         string ans = ""; int len = INT_MAX-1;
-        int n = s.size(); int m = t.size();
-       
-        vector<int> mp(128); int cnt = m;
- 
-        for(auto x:t)mp[x-'A']++;
-        int j=0,i=0;
+        map<char,int> tt;
         
-        while(i<n){ 
-            if( mp[s[i] -'A'] >0 ){ 
-                cnt--;
-            }  
-             mp[s[i] -'A']--; //this will red for all chars anyway
+        for(auto x:t)tt[x]++;
+        int cnt = t.size();
+        
+        int n  = s.size(); string ans = "";
+        int j =0;
+        
+        for(int i=0;i<n;i++){
+            
+            if(tt[s[i]]-- >0)cnt-- ;
             
             while(cnt==0){
-                if(i-j < len){
-                    len = i-j;
-                    ans = s.substr(j,i-j+1);
+                
+                if(ans.empty() || ans.size() > i-j+1){
+                    ans= s.substr(j,i-j+1);
+                    
                 }
                 
-                if(mp[s[j]-'A'] ==0){ 
-                    cnt++;
-                }
-                mp[s[j]-'A']++ ; //this will add for all char anyway
-                j++;
+                if(tt[s[j++]]++==0 )cnt++;
+                
             }
-            i++;
+            
         }
-  
-        return len==INT_MAX-1 ? "":ans ;
+        
+        return ans;
     }
 };
