@@ -1,6 +1,6 @@
 class Solution {
 public:
-    map<string,int> mp;
+    unordered_map<string,int> mp;
     int maxHeight(vector<vector<int>>& cu) {
         
         for(auto& x:cu){
