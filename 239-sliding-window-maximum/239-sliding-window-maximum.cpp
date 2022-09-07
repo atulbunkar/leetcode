@@ -1,31 +1,28 @@
 class Solution {
 public:
-    // MONOTONIC QUEUE IMPLEMENTATION
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        
         int n = nums.size();
-        vector<int> ans; 
+        vector<int> ans;
         
-        priority_queue<pair<int,int>> pq;
+        deque<int> dq; int j =0;
         
-        int maxx = INT_MIN, j=0; 
         
         for(int i=0;i<n;i++){
             
-            if(i<k-1)pq.push({nums[i],i});
+            if(!dq.empty() and dq.front() <= i-k)dq.pop_front();
             
-            else{
-                pq.push({nums[i],i});
-                while(!pq.empty() and pq.top().second < i-k+1)pq.pop();
-                ans.push_back(pq.top().first);
-                
-               
+            while(!dq.empty() and nums[dq.back()] < nums[i])dq.pop_back();
+            dq.push_back(i);
+            
+            if(i>=k-1){
+                ans.push_back(nums[dq.front()]);   
             }
+           
             
         }
         
         
-       
         return ans;
-        
     }
 };
