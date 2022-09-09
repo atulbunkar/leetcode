@@ -1,24 +1,49 @@
 class Solution {
 public:
-    int mem[102][102];
+    map<long,bool> mp;
+    bool isInterleave(string s1, string s2, string s3) {
+        return dp(0,0,0,s1,s2,s3);   
+    }
     
-    bool isInterleave(string& s1, string& s2, string& s3 ,int i=0, int j=0 ,int k=0) {
+    bool dp(int i,int j, int k,string& s1, string &s2, string& s3){
         
-        if(k==0)
-            memset(mem,-1,sizeof(mem));
+        long ki = i*7+ j*13 + k*17;
         
-        if(k==s3.size())return i==s1.size() and j==s2.size();
+        if(mp.count(ki))return mp[ki] ;
         
-        if(mem[i][j] != -1)return mem[i][j];
+        if(k==s3.size()){
+            if(i==s1.size() and j==s2.size())return 1;
+            return 0;
+        }
         
-        bool x=0,y=0,z=0;
-        if(s1[i] == s3[k])
-            x = isInterleave(s1,s2,s3,i+1,j,k+1);
+        if(i==s1.size() and j==s2.size()) return 0;
         
-        if(s2[j]==s3[k])
-            y = isInterleave(s1,s2,s3,i,j+1,k+1);
+        if(i==s1.size()){
+            if(s2[j] != s3[k])return mp[ki] = 0;
+            return mp[ki] =dp(i,j+1,k+1,s1,s2,s3);
+        }
         
-        return mem[i][j] = x||y; 
+        if(j==s2.size()){
+            //cout<< 4 ;
+            if(s1[i] != s3[k])return 0;
+            
+            return mp[ki] = dp(i+1,j,k+1,s1,s2,s3);
+        }
+        
+        if(s1[i] == s3[k] and s2[j] == s3[k]){
+            //cout << 1 ;
+            return mp[ki] = dp(i+1,j,k+1,s1,s2,s3) ||  dp(i,j+1,k+1,s1,s2,s3);
+        }
+        
+        if(s1[i] == s3[k]){
+            return mp[ki] =  dp(i+1,j,k+1,s1,s2,s3);
+        }
+        if(s2[j] == s3[k]){
+            //cout<< 3;
+            return mp[ki] =  dp(i,j+1,k+1,s1,s2,s3);
+        }
+        //cout<<2;
+        return 0;
         
     }
 };
