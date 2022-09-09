@@ -1,21 +1,25 @@
 class Solution {
 public:
-    int solve(vector<int>&nums,int i,int j,int t){
+    vector<int> nums;
+    bool PredictTheWinner(vector<int>& num) {
+        nums = num;
+        int sum = accumulate(num.begin(),num.end(),0);
         
-        if(i==j){
-            return nums[i];
+        return can(0,num.size()-1,1) >= (double)sum*1.0/2;    
+    }
+    
+    int can(int i,int j, int p){
+        
+        if(i>j){
+            return 0;
         }
-        if(t){
-            return max(nums[i]+solve(nums,i+1,j,!t),nums[j]+solve(nums,i,j-1,!t));
+        
+        if(p){
+            return max(can(i+1,j,1-p)+nums[i] , can(i,j-1,1-p)+nums[j]) ;
         }
         else{
-            return  min(-1*nums[i]+solve(nums,i+1,j,!t),-1*nums[j]+solve(nums,i,j-1,!t));
+            return min( can(i+1,j,1-p) , can(i,j-1,1-p) );
         }
-    }
-    bool PredictTheWinner(vector<int>& nums) {
-        int n =nums.size();
-        int x= solve(nums,0,n-1,1);
-        //cout<<x<<" ";
-        return x<0?0:1;
+        
     }
 };
