@@ -3,7 +3,7 @@ public:
     vector<int> nums;
     bool PredictTheWinner(vector<int>& num) {
         nums = num;
-        int sum = accumulate(num.begin(),num.end(),0);
+        
         
         return can(0,num.size()-1,1) >= 0;    
     }
