@@ -4,7 +4,7 @@ public:
         map<char,int> cnt;
         for(auto x:s)cnt[x]++;
         
-        stack<char> sc;
+        string ans = "";
         vector<int> onstk(26,0);
         
         int n = s.size();
@@ -16,28 +16,25 @@ public:
                 continue;
             }
             
-            while(!sc.empty()){
+            while(!ans.empty()){
                 
-                if(sc.top() > s[i] and cnt[sc.top()]>0){
+                if(ans.back() > s[i] and cnt[ans.back()]>0){
                    // cnt[sc.top()]--;
-                    onstk[sc.top()-'a'] = 0;
-                    sc.pop();
+                    onstk[ans.back()-'a'] = 0;
+                    //sc.pop();
+                    ans.pop_back();
                 }
                 else
                     break;
                 
             }
-            sc.push(s[i]);
+            ans += s[i];
             cnt[s[i]]--;
             onstk[s[i]-'a'] = 1;
         }
         
-        string ans = "";
-        while(!sc.empty()){
-            ans += sc.top();
-            sc.pop();
-        }
-        reverse(ans.begin(),ans.end());
+       
+      //  reverse(ans.begin(),ans.end());
         return ans;
     }
 };
