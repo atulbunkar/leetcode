@@ -1,39 +1,20 @@
 
 class Solution {
 public:
-    //TO do : recursive 
-    TreeNode* trimBST(TreeNode* root, int L, int R) {
+    TreeNode* trimBST(TreeNode* root, int low, int high) {
         
-
-      while(root!=NULL )
-        {
-            if(root->val<L) { root = root->right; }
-            else if(root->val > R) { root = root->left; }
-          else break;
-        }
+        if(!root)return NULL;
         
-        // temporary pointer for left and right subtree
-        TreeNode *Ltemp = root;
-        TreeNode *Rtemp = root;
+        if(low>root->val)
+            return trimBST(root->right,low,high);
         
-        if(!root)return root;
+        if(high < root->val)
+            return trimBST(root->left,low,high);
         
-        // remove the elements larger than L
-        while(Ltemp->left)
-        {
-            if( (Ltemp->left->val)<L ) { Ltemp->left = Ltemp->left->right; }
-            else { Ltemp = Ltemp->left; }
-        }
-         // remove the elements larger than R
-        while(Rtemp->right)
-        {
-            if( (Rtemp->right->val)>R) { Rtemp->right = Rtemp->right->left; }
-            else { Rtemp = Rtemp->right; }
-        }
-
-       
+        root->left = trimBST(root->left,low,high);
+        root->right =   trimBST(root->right,low,high);
+        
         return root;
+        
     }
-    
-    
 };
