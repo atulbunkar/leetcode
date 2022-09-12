@@ -1,67 +1,31 @@
 class Solution {
 public:
     vector<int> partitionLabels(string s) {
-        map<char , pair< int , int > > mp;
-        int n = s.size();
-        for(int i = 0; i < n ;i++){
-            if(mp.find(s[i]) != mp.end())
-            {
-                int mini = mp[s[i]].first;
-                int mazi = mp[s[i]].second;
-                if(i<mini)
-                    mp[s[i]]={i,mazi};
-                if(i>mazi)
-                    mp[s[i]] = {mp[s[i]].first,i};
-            }
-            else{
-                mp[s[i]] ={i,i};
-            }
+        vector<int> c(26,0); int n = s.size();
         
+        for(int i=0;i<n;i++){
+            c[s[i]-'a'] = i;
         }
-        vector<pair<int,int>>ranges; vector<bool> vstd(26,false);
         
-        for(int i =0;i<n;i++)
-        {
+        vector<int> ans; int tmp = 1;
+        
+        int i=0; int newend,maxend = -1;
+        
+        while(i<n){
             
-            auto x =mp.find(s[i]) ; if(vstd[s[i] -'a'])continue;
+            newend = c[s[i]-'a'];
+            maxend = max(maxend,newend);
             
-            vstd[s[i] -'a'] = true;
-            
-            //cout<<x.first<<" "<<x.second.first<<" "<<x.second.second<<endl;
-            bool f =0;
-            for(auto &y:ranges){
-                if(y.first < x->second.first && y.second > x->second.second){
-                    f=1;break;
-                    continue;
-                }
-                else if(y.first > x->second.first && y.second < x->second.second){
-                    y.first =x->second.first;
-                    y.second = x->second.second;f=1;break;
-                    continue;
-                }
-                else if(y.first < x->second.first && y.second < x->second.second && y.second > x->second.first){
-                     y.second = x->second.second; f=1;
-                     break;
-                }
-                else if(y.first > x->second.first && y.second > x->second.second && y.first < x->second.second){
-                    y.first = x->second.first; f=1;
-                    break;   
-                }
-               
+            if(maxend == i){
+                ans.push_back(tmp);
+                tmp = 0;
             }
-            if(f==0){
-                ranges.push_back({x->second.first,x->second.second});
-            }
+            tmp++;
+            i++;
+            
         }
-        vector<int>ans;
-        for(auto &x:ranges){
-            //cout<<x.first<<" "<<x.second<<endl;
-           
-            ans.push_back(x.second-x.first+1);
-        }
-       // sort(ans.begin(),ans.end());
+        
         return ans;
+        
     }
-    
-    
 };
