@@ -2,11 +2,13 @@ class Solution {
 public:
     int ans = 1e8;
     
-    map<long,bool> mem;
+   // map<long,bool> mem;
+    
+    int mem[31][30001];
     
     int lastStoneWeightII(vector<int>& s) {
         int sum = accumulate(s.begin(),s.end(),0);
-        
+        memset(mem,-1,sizeof(mem));
         dp(0,0,sum,s);
         return ans;
         
@@ -14,9 +16,9 @@ public:
     
     void dp(int i,int cursum, int sum ,vector<int>& s ){
         
-        long k = 7*i + 13*cursum ;
-        if(mem.count(k))return ;
-        mem[k]=1;
+        //long k = 7*i + 13*cursum ;
+        if(mem[i][cursum] >-1)return ;
+        mem[i][cursum] = 1;
         
         if(i==s.size())return;
         
