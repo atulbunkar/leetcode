@@ -1,27 +1,32 @@
 class Solution {
 public:
-    int lastStoneWeightII(vector<int>& st) {
-  
-        int ans = INT_MAX;
+    int ans = 1e8;
+    
+    map<long,bool> mem;
+    
+    int lastStoneWeightII(vector<int>& s) {
+        int sum = accumulate(s.begin(),s.end(),0);
         
-        set<int> s,t;
-        s.insert(0);
+        dp(0,0,sum,s);
+        return ans;
         
-        for(auto n:st){
-            t =s;
-            s.clear();
-            for(auto x:t){
-                s.insert(n-x);
-                s.insert(n+x);
-            }
-        }
+    }
+    
+    void dp(int i,int cursum, int sum ,vector<int>& s ){
         
-       // int ans = INT_MAX;
-        for(int x:s)
-            ans = min(ans,abs(x));
+        long k = 7*i + 13*cursum ;
+        if(mem.count(k))return ;
+        mem[k]=1;
         
-        return ans ;
+        if(i==s.size())return;
+        
+        ans = min(ans, abs( (sum-cursum) - cursum ) );
+        
+        dp(i+1,cursum+s[i],sum,s);
+        dp(i+1,cursum,sum,s);
+        
         
         
     }
+    
 };
