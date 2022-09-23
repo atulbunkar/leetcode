@@ -1,25 +1,31 @@
 class Solution {
 public:
     
-       int mem[2001][2001]; int mem2[2001]; bool flag = false;
+     int mem[2001][2001]; int mem2[2001]; bool flag = false;
     
     bool checkPartitioning(string s) {
          int n=s.size();   memset(mem,-1,sizeof(mem)); 
-        if(n==1)return 0; 
-        bool ans;
+        if(n==3)return 1; 
+         
+        return part(0,3,s);
+    }
+    
+    bool part(int i,int k,string& s){
+        int n = s.size();
         
-        for(int i=0;i<n;i++){
+        if(k==1)return ispal(s,i,n-1);
+        if(i==n)return 0;
+        
+        bool ans =0;
+        
+        for(int j=i; j<n-1;j++){
             
-            for(int j=i+1; j<n-1;j++){
-                
-                if(ispal(s,0,i) and ispal(s,i+1,j) and ispal(s,j+1,n-1) )return true;
-                
-            }
+            if(ispal(s,i,j))ans |= part(j+1,k-1,s);
             
         }
         
+        return ans;
         
-        return false;    
     }
     
      
