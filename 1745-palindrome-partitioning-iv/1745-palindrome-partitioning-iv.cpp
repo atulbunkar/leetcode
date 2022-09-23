@@ -13,12 +13,13 @@ public:
     bool part(int i,int k,string& s){
         int n = s.size();
         
-        if(k==1)return ispal(s,i,n-1);
-        if(i==n)return 0;
         
+         if(i>=n)return 0;
+        if(k==1)return ispal(s,i,n-1);
+       
         bool ans =0;
         
-        for(int j=i; j<n-1;j++){
+        for(int j=i; j<n;j++){
             
             if(ispal(s,i,j))ans |= part(j+1,k-1,s);
             
