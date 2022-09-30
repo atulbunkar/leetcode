@@ -1,45 +1,76 @@
 class NumArray {
 public:
-    vector<int> bit; int n; 
+    vector<int> st ; int n;
+    
+    void build(int lr,int rr, int idx , vector<int>& nums ){
+        
+        if(lr>rr)return;
+        
+        if(lr==rr){st[idx] = nums[lr]; return;}
+        
+        int mid  = (lr+rr)/2;
+        
+        build(lr,mid,2*idx+1,nums);
+        build(mid+1, rr, 2*idx+2,nums);
+        
+        st[idx] = st[2*idx+1] + st[2*idx+2];
+        
+    }
+    
     NumArray(vector<int>& nums) {
         n = nums.size();
-        bit.resize(n+1,0);
+        st.resize(4*n+4);
+         build(0,n-1,0,nums);
+    }
+    
+    void update(int index, int val) { 
+     
+        updt(0,0,n-1 ,  index,val);
+    }
+    
+    void updt(int idx, int lr,int rr,  int i,int val){
+        if(lr==rr){st[idx] = val; return;}
+        if(i < lr || i > rr)return;
         
-        for(int i=0;i<n;i++){
-            create(i+1,nums[i]);
+        int mid = (lr+rr)/2;
+        
+        if(i <= mid){
+            updt(2*idx+1, lr , mid , i,val);
+        }
+        else{
+            updt(2*idx+2,mid+1,rr,i,val);
         }
         
+        st[idx] = st[2*idx+1] + st[2*idx+2];
+        
     }
-    
-    void create(int index, int val) {
-        for(int i=index;i<bit.size();){
-            bit[i] += val;
-            i += (i&-i);
-        } 
-    }
-    
-    void update(int index, int val){
-         int diff = val - ( sum(index+1) - sum(index));
-      
-         for(int i=index+1;i<bit.size();){
-            bit[i] += diff;
-            i += (i&-i);
-        } 
-    }
-    
     
     int sumRange(int left, int right) {
-        return sum(right+1) - sum(left);
+     
+        return sum(0, 0, n-1, left, right);
     }
     
-    int sum(int idx){       //returns sum 1->idx
-        if(idx<=0)return 0;
-        int ans =0; 
-        for(int i=idx;i>0;){ //BIT size is n+1
-            ans += bit[i];
-            i -= (i&-i);
+    int sum(int idx , int lr, int rr, int l, int r){
+        
+        if(rr < l)return 0;
+        
+        if(lr > r)return 0;
+        
+        if(l>r)return 0;
+        int mid= (lr+rr)/2;
+        
+        if(lr==l and rr==r){
+            return st[idx];
         }
-        return ans;
+        
+        return sum(2*idx+1, lr , mid , l, min(r,mid) )  + sum(2*idx+2 , mid+1,rr, max(l,mid+1) , r  );
+        
     }
 };
 
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * obj->update(index,val);
+ * int param_2 = obj->sumRange(left,right);
+ */
