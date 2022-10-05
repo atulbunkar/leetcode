@@ -1,30 +1,27 @@
 class Solution {
 public:
-    int mem[10001];
+    vector<int> dp;
+    int helper(vector<pair<int,int>> &temp,int i){
+        int n = temp.size();
+        if(i >= n)
+            return 0;
+        if(dp[i]!= -1)
+            return dp[i];
+        int x = temp[i].first*temp[i].second;
+        if(i < n-1 && temp[i+1].first == temp[i].first+1)
+            return dp[i] = max(x+helper(temp,i+2),helper(temp,i+1));
+        return dp[i] = x+helper(temp,i+1);
+    }
     int deleteAndEarn(vector<int>& nums) {
         map<int,int> mp;
-        for(auto x:nums)mp[x]++; // num,count
-        vector<pair<int,int>> v;  
-       memset(mem,-1,sizeof(mem));
-        
-        for(auto x:mp)v.push_back(make_pair(x.first,x.second));
-            
-        return dp(0,v);
-    }
-    
-    int dp(int i , vector<pair<int,int>>& v){
-        
-        if (i>=v.size())return 0;
-        if(i== v.size()-1)return v[i].first * v[i].second;
-        
-        if(mem[i] != -1)return mem[i];
-        
-        if(v[i+1].first == v[i].first+1){
-            return  mem[i] = max(dp(i+2,v)+v[i].first * v[i].second, dp(i+1,v));
+        for(auto &it : nums)
+            mp[it]++;
+        vector<pair<int,int>> temp;
+        for(auto it : mp){
+            temp.push_back({it.first,it.second});
         }
-        else{
-            return  mem[i] = dp(i+1,v) +v[i].first * v[i].second;
-        }
-
+        int n = nums.size();
+        dp.resize(n,-1);
+        return helper(temp,0);
     }
 };
